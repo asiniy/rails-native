@@ -1,0 +1,35 @@
+### TODO rails-native things, purge these
+# dependencies
+webview-app/node_modules/
+
+# Expo
+webview-app/.expo/
+webview-app/dist/
+webview-app/web-build/
+webview-app/expo-env.d.ts
+
+# Native
+webview-app/*.orig.*
+webview-app/*.jks
+webview-app/*.p8
+webview-app/*.p12
+webview-app/*.key
+webview-app/*.mobileprovision
+
+# Metro
+webview-app/.metro-health-check*
+
+# debug
+webview-app/npm-debug.*
+webview-app/yarn-debug.*
+webview-app/yarn-error.*
+
+# macOS
+webview-app/.DS_Store
+webview-app/*.pem
+
+# local env files
+webview-app/.env*.local
+
+# typescript
+webview-app/*.tsbuildinfo
