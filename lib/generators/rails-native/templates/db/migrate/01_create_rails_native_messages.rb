@@ -8,6 +8,7 @@ class CreateRailsNativeMessages < ActiveRecord::Migration[7.2]
       t.integer :attempts_count, null: false, default: 0
       t.datetime :acked_at
       t.datetime :last_attempt_at
+      t.uuid :request_message_id, index: true
 
       t.timestamps(index: true)
     end

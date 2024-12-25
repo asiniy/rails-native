@@ -27,6 +27,7 @@
 1. Usual menu rename into bottom bar menu - and reducer and other react-native file names
 1. Add top native menu
 1. Offline mode
+1. `asiniy` -> `mad.online` as a username
 
 [TODO] Search for all `TODO`, `mad` & `crocodile`, `webview-app` in the code, and handle these
 
@@ -136,3 +137,11 @@ Add to the gem & github description when work is done
 ## Building a production-app
 
 [TODO]
+
+# After release developer roadmap
+
+1. Add the device emulator
+1. Implement the autoclean mechanism - remove old ruby messages
+1. Add validations to the `RailsNative::Message`
+1. RSpec coverage
+1. WebviewApp test coverage

@@ -1,22 +1,26 @@
-type DIRECTION = 'in'|'out'
+type SENDER = 'rails-native'|'app'
 
 // functionality is similar to message.rb
+//
+// Differences:
+// * No room - there is just one room
+//
 class Message {
-  direction: DIRECTION
   event: string
   payload: object
+  sender: SENDER
 
-  constructor({ direction, event, payload }: { direction: DIRECTION, event: string, payload: object }) {
-    this.direction = direction
+  constructor({ sender, event, payload }: { sender: SENDER, event: string, payload: object }) {
     this.event = event
     this.payload = payload
+    this.sender = sender
   }
 
-  get serialize(): { direction: DIRECTION, event: string, payload: object|null } {
+  get serialize(): { sender: SENDER, event: string, payload: object|null } {
     return {
-      direction: this.direction,
       event: this.event,
       payload: this.payload,
+      sender: this.sender,
     }
   }
 

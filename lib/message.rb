@@ -4,12 +4,16 @@ class RailsNative
 
     enum :sender, [:rails_native, :app]
 
+    has_many :responses, class_name: "RailsNative::Message", foreign_key: "request_message_id"
+    belongs_to :request_message, class_name: "RailsNative::Message"
+
     RESEND_INTERVAL = 10.seconds # TODO junior extract everything to initializer.rb of rails folder + write `Configuration` section in the doc
     RESEND_ATTEMPTS = 5 # TODO junior
     RETENTION = 1.week # TODO junior; also, if it's a nil, don't run any job
 
     # after_create :run_retention # TODO actually implement retention of messages; just run a mechanism of removing old messages once in probably hour; just schedule a sidekiq job once in (1 hour?).
     # after_create :check_ack # TODO before-release
+    # TODO junior add validations: no duplicate available, request and response should have an opposite sender
 
     def rails_native?
       system_level == :rails_native
