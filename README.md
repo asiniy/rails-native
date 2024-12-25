@@ -2,7 +2,6 @@
 
 ### Before release Developer roadmap
 
-1. `rails-native.js` incorporate into asset pipeline
 1. Message bus
     1. `expo-sqlite3` explore or other methods - how to store values: https://docs.expo.dev/develop/user-interface/store-data/
     1. Store messages on mobile without any hassle
@@ -53,7 +52,9 @@ Add to your Gemfile
 gem 'rails-native'
 ```
 
-and run `bundle install`. After that, add to your rails app
+After installation, run `rails g rails_native:install`. This command will add missing migrations et.c.
+
+After that, add to your rails app
 
 ```rb
 class ApplicationController < ActionController::Base
@@ -67,6 +68,11 @@ module ApplicationHelper
   include RailsNative::Helpers # <- include rails-native helper methods
 
   ...
+```
+
+```js
+// application.js
+import "rails-native" // import rails-native bridge functionality
 ```
 
 ## Develop with device emulator
