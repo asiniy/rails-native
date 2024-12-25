@@ -1,8 +1,8 @@
-import { useRef } from 'react'
 import { WebView } from 'react-native-webview'
 import DOMParser from 'react-native-dom-parser'
 import * as config from '@/config.json'
-import { MenuItem } from '@/utils/menuReducer'
+import Message from '@/utils/message'
+import handleMenu from '@/utils/handleMenu'
 
 type NativeEvent = {
   canGoBack: boolean,
@@ -13,37 +13,27 @@ type NativeEvent = {
   url: string,
 }
 
-const SEND_HTML = 'window.sendHTML = () => { window.ReactNativeWebView.postMessage(JSON.stringify({ type: "innerHTML", data: document.body.outerHTML })) }'
+const SEND_HTML = 'window.sendHTML = () => { window.ReactNativeWebView.postMessage(JSON.stringify({ event: "rails-native.html.change", payload: { html: document.body.outerHTML } })) }'
 const OPEN_URL = 'window.openURL = (url) => { window.location.replace(url) }'
 
 const injectedJavaScript = [SEND_HTML, OPEN_URL].join(';')
 const handleMessage = ({ menuDispatch }) => ({ nativeEvent }: { nativeEvent: NativeEvent }) => {
-  const { data, type }: { data: string|object, type: string } = JSON.parse(nativeEvent.data)
+  const { event, payload }: { event: string, payload: object } = JSON.parse(nativeEvent.data)
+  const message = new Message({ direction: 'in', event, payload })
+  console.log('received a message', message.serialize)
 
-  switch (type) {
-    case 'innerHTML':
-      const htmlDoc = new DOMParser(data as string)
-      const menu = htmlDoc.getElementsByTagName(config.MENU_TAG)[0]
-
-      if (!menu) { return null }
-      const menuItems = menu.getElementsByTagName(config.MENU_ITEM_TAG)
-      const items: MenuItem[] = menuItems.map(({ attributes }) => (
-        {
-          active: attributes['data-active'] === 'true',
-          icon: attributes['data-icon'],
-          title: attributes['data-title'],
-          url: attributes['data-url'],
-        }
-      ))
-      menuDispatch({ type: 'setMenu', data: items })
+  switch (message.event) {
+    case 'rails-native.html.change':
+      const html = new DOMParser(message.payload.html as string)
+      handleMenu(menuDispatch, html)
       return
-
     default:
-      console.log(`Don't know how to handle: ${type}`)
+      handleMessage(message)
+      return
   }
 }
 
-const source = { uri: 'http://192.168.1.142:3000' }
+const source = { uri: 'http://192.168.1.142:3000' } // TODO fix it
 
 const USER_AGENT = `${config.USER_AGENT}/${config.VERSION}`
 

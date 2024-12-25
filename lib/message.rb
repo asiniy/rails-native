@@ -1,32 +1,75 @@
 class RailsNative
-  class Message
-    attr_reader :room, :direction, :event, :payload
+  class Message < ActiveRecord::Base
+    self.table_name = "rails_native_messages"
 
-    def initialize(room:, direction:, event:, payload:)
-      @room = room
-      @direction = direction
-      @event = event
-      @payload = payload
-    end
+    enum :sender, [:rails_native, :app]
 
-    def in?
-      direction == :out
-    end
+    RESEND_INTERVAL = 10.seconds # TODO junior extract everything to initializer.rb of rails folder + write `Configuration` section in the doc
+    RESEND_ATTEMPTS = 5 # TODO junior
+    RETENTION = 1.week # TODO junior; also, if it's a nil, don't run any job
 
-    def out?
-      direction == :in
-    end
+    # after_create :run_retention # TODO actually implement retention of messages; just run a mechanism of removing old messages once in probably hour; just schedule a sidekiq job once in (1 hour?).
+    # after_create :check_ack # TODO before-release
 
     def rails_native?
       system_level == :rails_native
     end
 
-    def device?
-      service_level == :device
+    Service = Struct.new(:title, :actions)
+    Action = Struct.new(:title, :sender)
+
+    SERVICES = [
+      Service.new(:device, [
+        Action.new(:connected, :app),
+        # Action.new(:ack, :app),
+      ]),
+      Service.new(:ble, [
+        Action.new(:request_permissions, :rails_native),
+        Action.new(:search_for_devices, :rails_native),
+        Action.new(:stop_search_for_devices, :rails_native),
+        Action.new(:connect, :rails_native),
+        Action.new(:disconnect, :rails_native),
+        Action.new(:transmit, :rails_native),
+
+        Action.new(:got_permission, :app),
+        Action.new(:rejected_permission, :app),
+        Action.new(:devices_found, :app),
+        Action.new(:device_connected, :app),
+        Action.new(:device_disconnected, :app),
+        Action.new(:data_received, :app),
+      ]),
+    ]
+
+    def serialize
+      {
+        event:,
+        payload:,
+      }
     end
 
-    def bluetooth?
-      service_level == :bluetooth
+    def payload=(data)
+      self.raw_payload = data.to_json if data
+    end
+
+    def payload
+      raw_payload && JSON.parse(self.raw_payload)
+    end
+
+    SERVICES.each do |service|
+      # TODO junior for all the methods defined in this block, check there is no instance method existing. `raise` if it exists
+      # define service level checks
+      method_name = "#{service.title}?"
+      define_method method_name do
+        service_level == service.title
+      end
+
+      service.actions.each do |action|
+        # define action level checks
+        method_name = "#{service.title}_#{action.title}?"
+        define_method method_name do
+          service_level == service.title && action_level == action.title
+        end
+      end
     end
 
     def system_level

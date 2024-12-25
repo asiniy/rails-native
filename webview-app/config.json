@@ -1,6 +1,6 @@
 {
-  "MENU_TAG": "webview-app-menu",
-  "MENU_ITEM_TAG": "webview-app-menu-item",
-  "USER_AGENT": "WebView-App",
+  "MENU_TAG": "rails-native-menu",
+  "MENU_ITEM_TAG": "rails-native-menu-item",
+  "USER_AGENT": "RailsNative-App",
   "VERSION": 0.1
 }

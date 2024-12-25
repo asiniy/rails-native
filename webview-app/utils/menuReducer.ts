@@ -5,7 +5,7 @@ type MenuItem = {
   url: string,
 }
 
-const menuReducer = (state: null|MenuItem[], action: { type: string, data: MenuItem[] }) => {
+const menuReducer = (_state: null|MenuItem[], action: { type: string, data: MenuItem[] }) => {
   const { type, data } = action
 
   switch (type) {

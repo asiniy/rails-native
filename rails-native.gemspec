@@ -6,5 +6,5 @@ Gem::Specification.new do |s|
   s.files = ['lib/rails-native/**/*.rb']
   s.homepage = ['https://github.com/asiniy/rails-native']
 
-  s.add_dependency "activesupport", ">= 7.1"
+  s.add_dependency "rails", ">= 7.1"
 end
