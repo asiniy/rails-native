@@ -1,5 +1,6 @@
 require "channel"
 require "controller"
+require "engine"
 require "generators/rails-native/install_generator"
 require "helpers"
 require "message"

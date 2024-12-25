@@ -2,7 +2,7 @@
 
 ### Before release Developer roadmap
 
-1. `rails-native.js` incorporate into propshaft
+1. `rails-native.js` incorporate into asset pipeline
 1. Message bus
     1. `expo-sqlite3` explore or other methods - how to store values: https://docs.expo.dev/develop/user-interface/store-data/
     1. Store messages on mobile without any hassle
