@@ -12,4 +12,14 @@ class RailsNative
   USER_AGENT = config.fetch("USER_AGENT")
   MENU_TAG = config.fetch("MENU_TAG")
   MENU_ITEM_TAG = config.fetch("MENU_ITEM_TAG")
+
+  def self.crypt
+    return @@crypt if defined?(@@crypt)
+
+    len = ActiveSupport::MessageEncryptor.key_len
+    salt = 'rails-native'
+    key = ActiveSupport::KeyGenerator.new(Rails.application.credentials.secret_key_base).generate_key(salt, len)
+    @@crypt = ActiveSupport::MessageEncryptor.new(key)
+    @@crypt
+  end
 end

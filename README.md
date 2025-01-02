@@ -3,6 +3,7 @@
 ### Before release Developer roadmap
 
 1. Message bus
+    1. Move message bus from browser to the app itself
     1. `expo-sqlite3` explore or other methods - how to store values: https://docs.expo.dev/develop/user-interface/store-data/
     1. Store messages on mobile without any hassle
     1. Implement :ack on rails-native
@@ -25,11 +26,15 @@
     1. Look at the docs for pushes in this article - especially, for a custom rails server
     1. TODO add steps
 1. Usual menu rename into bottom bar menu - and reducer and other react-native file names
+1. Bottom bar menu - add colors, themes et.c.
 1. Add top native menu
+1. Handle the url in WebScreen.tsx - using the `.yml` file
+1. App name - using the `.yml` file
 1. Offline mode
-1. `asiniy` -> `mad.online` as a username
-
-[TODO] Search for all `TODO`, `mad` & `crocodile`, `webview-app` in the code, and handle these
+1. `asiniy` -> `mad.online` as a GitHub username
+1. Remove all the `Bluetooth` things/labels/marks out of there including RailsNative::Message and all the migrations
+1. User agent - include all the details from the expo device
+1. [TODO] Search for all `TODO`, `mad` & `crocodile`, `webview-app` in the code, and handle these
 
 Painless ✅, Ultrafast ⚡ & Free-minded 💡 way to build Native Mobile Apps using Ruby on Rails
 
@@ -80,9 +85,10 @@ import "rails-native" // import rails-native bridge functionality
 
 [TODO]
 
-## Develop on real mobile app
+## Develop on mobile
 
 [TODO]
+[TODO] Also, don't forget to write an instruction on how to find out the localhost!
 
 ## Developer API
 
@@ -99,20 +105,20 @@ is_rails_native_request? # => true
 
 ### Build native menu with `rails_native_menu`/`rails_native_menu_item`
 
-[TODO] It's a bottom bar menu actually, not a menu actually. Rename everything, including TypeScript & JSON files
+[TODO] It's a bottom bar menu actually, not just a menu. Rename everything, including TypeScript & JSON files
 
 Take icons from the [FontAwesome V6](https://fontawesome.com/v6/search?o=r&m=free) free collection set.
 
 ```
-if is_rails_native_request?
+<% if is_rails_native_request? %>
   <%= rails_native_menu do %>
     <%= rails_native_menu_item "Home", root_path, active: current_page?(root_path), icon: "house" %>
     <%= rails_native_menu_item "Adminpanel", admin_path, active: current_page?(admin_path), icon: "user" %>
     ...
   <% end %>
-else
+<% else %>
   <your-website-html-regular-menu-goes-there>
-end
+<% end %>
 ```
 
 ### BlueTooth (BLE)
@@ -121,11 +127,6 @@ BlueTooth is implemented in BLE form - hence no ability to stream music or video
 
 #### [TODO] document BLE methods: `request_permissions`, `search_for_devices`, `stop_search_for_devices`, `connect`, `disconnect`, `transmit`
 #### [TODO] describe events: `got_permission`, `rejected_permission`, `devices_found`, `device_connected`, `device_disconnected`, `data_received`
-
-### Document GPS
-
-16 hours of work
-Add to the gem & github description when work is done
 
 ### [TODO] Document Push notifications
 
@@ -138,10 +139,12 @@ Add to the gem & github description when work is done
 
 [TODO]
 
-# After release developer roadmap
+# After release developer roadmap TODO
 
 1. Add the device emulator
 1. Implement the autoclean mechanism - remove old ruby messages
 1. Add validations to the `RailsNative::Message`
 1. RSpec coverage
 1. WebviewApp test coverage
+1. Icon - not only fontawesome, but custom svg's too! (8 hrs)
+1. GPS (16hrs)

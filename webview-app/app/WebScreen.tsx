@@ -18,6 +18,7 @@ const OPEN_URL = 'window.openURL = (url) => { window.location.replace(url) }'
 
 const injectedJavaScript = [SEND_HTML, OPEN_URL].join(';')
 const handleMessage = ({ menuDispatch }) => ({ nativeEvent }: { nativeEvent: NativeEvent }) => {
+  console.log('nativeEvent Data', nativeEvent.data)
   const { event, payload }: { event: string, payload: object } = JSON.parse(nativeEvent.data)
   const message = new Message({ direction: 'in', event, payload })
   console.log('received a message', message.serialize)
@@ -25,7 +26,7 @@ const handleMessage = ({ menuDispatch }) => ({ nativeEvent }: { nativeEvent: Nat
   switch (message.event) {
     case 'rails-native.html.change':
       const html = new DOMParser(message.payload.html as string)
-      handleMenu(menuDispatch, html)
+      handleMenu({ menuDispatch, html })
       return
     default:
       handleMessage(message)

@@ -10,6 +10,7 @@ const railsNativeSubscription = consumer.subscriptions.create({ channel: "RailsN
   received(data) {
     console.log('datum')
     console.log('I received the payload', data)
+    window.ReactNativeWebView.postMessage(JSON.stringify(data))
   }
 })
 

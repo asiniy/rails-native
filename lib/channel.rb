@@ -14,7 +14,7 @@ class RailsNative
       # TODO junior DRY all the methods
       def ble_request_permissions(room)
         message = RailsNative::Message.create!(
-          direction: :out,
+          sender: :rails_native,
           room: room,
           event: "rails_native.ble.request_permissions",
         )

@@ -1,17 +1,16 @@
 type SENDER = 'rails-native'|'app'
 
 // functionality is similar to message.rb
-//
-// Differences:
-// * No room - there is just one room
-//
 class Message {
   event: string
   payload: object
+  room: string
   sender: SENDER
 
-  constructor({ sender, event, payload }: { sender: SENDER, event: string, payload: object }) {
+  // WITH ROOM
+  constructor({ event, payload, room, sender }: { event: string, payload: object, room: string, sender: SENDER }) {
     this.event = event
+    this.room = room
     this.payload = payload
     this.sender = sender
   }

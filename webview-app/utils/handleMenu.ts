@@ -1,7 +1,7 @@
 import * as config from '@/config.json'
 import { MenuItem } from './menuReducer'
 
-const handleMenu = (html, menuDispatch) => {
+const handleMenu = ({ html, menuDispatch }) => {
   const menu = html.getElementsByTagName(config.MENU_TAG)[0]
 
   if (!menu) { return null }
