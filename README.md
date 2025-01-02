@@ -2,26 +2,6 @@
 
 ### Before release Developer roadmap
 
-1. Message bus
-    1. Move message bus from browser to the app itself
-    1. `expo-sqlite3` explore or other methods - how to store values: https://docs.expo.dev/develop/user-interface/store-data/
-    1. Store messages on mobile without any hassle
-    1. Implement :ack on rails-native
-    1. Implement :ack on mobile
-    1. check_ack mechanism on mobile
-    1. check_ack mechanism on rails-native
-    1. on connection - send all not acked messages (mobile)
-    1. on connection - send all not acked messages (rails-native)
-1. BLE methods
-    1. request_permissions
-    1. got_permission
-    1. rejected permission
-    1. search for devices
-    1. devices_found
-    1. device_connected
-    1. device_disconnected
-    1. transmit
-    1. data_received
 1. Pushes
     1. Look at the docs for pushes in this article - especially, for a custom rails server
     1. TODO add steps
@@ -32,13 +12,12 @@
 1. App name - using the `.yml` file
 1. Offline mode
 1. `asiniy` -> `mad.online` as a GitHub username
-1. Remove all the `Bluetooth` things/labels/marks out of there including RailsNative::Message and all the migrations
 1. User agent - include all the details from the expo device
 1. [TODO] Search for all `TODO`, `mad` & `crocodile`, `webview-app` in the code, and handle these
 
 Painless ✅, Ultrafast ⚡ & Free-minded 💡 way to build Native Mobile Apps using Ruby on Rails
 
-* Truly native app (Menu, Pushes, Bluetooth/BLE et.c.)
+* Truly native app (Menu, Pushes, et.c.)
 * Good old Ruby on Rails development
 * No need for MacOS, Android, iOS. You can develop & build Native Mobile App even on Linux!
 * No XCode/Android Studio required
@@ -58,7 +37,7 @@ Add to your Gemfile
 gem 'rails-native'
 ```
 
-After installation, run `rails g rails_native:install`. This command will add missing migrations et.c.
+After installation, run `rails g rails_native:install`. This command will add config file et.c.
 
 After that, add to your rails app
 
@@ -74,11 +53,6 @@ module ApplicationHelper
   include RailsNative::Helpers # <- include rails-native helper methods
 
   ...
-```
-
-```js
-// application.js
-import "rails-native" // import rails-native bridge functionality
 ```
 
 ## Develop with device emulator
@@ -121,13 +95,6 @@ Take icons from the [FontAwesome V6](https://fontawesome.com/v6/search?o=r&m=fre
 <% end %>
 ```
 
-### BlueTooth (BLE)
-
-BlueTooth is implemented in BLE form - hence no ability to stream music or video, but you can easily send data to side devices! It uses [react-native-ble-pbx](https://github.com/dotintent/react-native-ble-plx) package under the hood.
-
-#### [TODO] document BLE methods: `request_permissions`, `search_for_devices`, `stop_search_for_devices`, `connect`, `disconnect`, `transmit`
-#### [TODO] describe events: `got_permission`, `rejected_permission`, `devices_found`, `device_connected`, `device_disconnected`, `data_received`
-
 ### [TODO] Document Push notifications
 
 * https://docs.expo.dev/push-notifications/overview/
@@ -148,3 +115,4 @@ BlueTooth is implemented in BLE form - hence no ability to stream music or video
 1. WebviewApp test coverage
 1. Icon - not only fontawesome, but custom svg's too! (8 hrs)
 1. GPS (16hrs)
+1. Bluetooth/BLE (48hrs)
