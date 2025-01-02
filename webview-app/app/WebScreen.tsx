@@ -1,7 +1,7 @@
 import { WebView } from 'react-native-webview'
 import DOMParser from 'react-native-dom-parser'
 import * as globals from '@/globals.json'
-import handleMenu from '@/utils/handleMenu'
+import { handleBottomMenu } from '@/utils/handleMenu'
 
 type NativeEvent = {
   canGoBack: boolean,
@@ -22,7 +22,7 @@ const handleHTML = ({ menuDispatch }) => ({ nativeEvent }: { nativeEvent: Native
   switch (event) {
     case 'rails-native.html.change':
       const html = new DOMParser(payload.html as string)
-      handleMenu({ menuDispatch, html })
+      handleBottomMenu({ menuDispatch, html })
       return
     default:
       throw new Error()

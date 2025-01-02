@@ -1,12 +1,12 @@
 import * as globals from '@/globals.json'
-import { MenuItem } from './menuReducer'
+import { BottomMenuItem } from './menuReducer'
 
-const handleMenu = ({ html, menuDispatch }) => {
-  const menu = html.getElementsByTagName(globals.MENU_TAG)[0]
+const handleBottomMenu = ({ html, menuDispatch }) => {
+  const menu = html.getElementsByTagName(globals.BOTTOM_MENU_TAG)[0]
 
   if (!menu) { return null }
-  const menuItems = menu.getElementsByTagName(globals.MENU_ITEM_TAG)
-  const items: MenuItem[] = menuItems.map(({ attributes }) => (
+  const menuItems = menu.getElementsByTagName(globals.BOTTOM_MENU_ITEM_TAG)
+  const items: BottomMenuItem[] = menuItems.map(({ attributes }) => (
     {
       active: attributes['data-active'] === 'true',
       icon: attributes['data-icon'],
@@ -17,4 +17,4 @@ const handleMenu = ({ html, menuDispatch }) => {
   menuDispatch({ type: 'setMenu', data: items })
 }
 
-export default handleMenu
+export { handleBottomMenu }

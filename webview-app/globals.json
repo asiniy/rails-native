@@ -1,6 +1,6 @@
 {
-  "MENU_TAG": "rails-native-menu",
-  "MENU_ITEM_TAG": "rails-native-menu-item",
+  "BOTTOM_MENU_TAG": "rails-native-bottom-menu",
+  "BOTTOM_MENU_ITEM_TAG": "rails-native-bottom-menu-item",
   "USER_AGENT": "RailsNative-App",
   "VERSION": 0.1
 }

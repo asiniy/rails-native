@@ -16,6 +16,6 @@ class RailsNative
   globals = JSON.load(globals_file)
 
   USER_AGENT = globals.fetch("USER_AGENT")
-  MENU_TAG = globals.fetch("MENU_TAG")
-  MENU_ITEM_TAG = globals.fetch("MENU_ITEM_TAG")
+  BOTTOM_MENU_TAG = globals.fetch("BOTTOM_MENU_TAG")
+  BOTTOM_MENU_ITEM_TAG = globals.fetch("BOTTOM_MENU_ITEM_TAG")
 end

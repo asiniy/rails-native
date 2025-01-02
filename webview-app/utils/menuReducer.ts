@@ -1,11 +1,11 @@
-type MenuItem = {
+type BottomMenuItem = {
   active: boolean,
   title: string,
   icon: string,
   url: string,
 }
 
-const menuReducer = (_state: null|MenuItem[], action: { type: string, data: MenuItem[] }) => {
+const bottomMenuReducer = (_state: null|BottomMenuItem[], action: { type: string, data: BottomMenuItem[] }) => {
   const { type, data } = action
 
   switch (type) {
@@ -16,5 +16,7 @@ const menuReducer = (_state: null|MenuItem[], action: { type: string, data: Menu
   }
 }
 
-export default menuReducer
-export { MenuItem }
+export {
+  BottomMenuItem,
+  bottomMenuReducer,
+}

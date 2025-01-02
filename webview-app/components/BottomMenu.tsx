@@ -1,16 +1,16 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import Icon from '@expo/vector-icons/FontAwesome6';
-import { MenuItem } from "@/utils/menuReducer";
+import { BottomMenuItem } from "@/utils/menuReducer";
 
-type BottomTabBarProps = {
-  options: MenuItem[],
+type BottomMenuProps = {
+  menu: BottomMenuItem[],
   onPress: (url: string) => void,
 }
 
-const BottomTabBar = ({ options, onPress }: BottomTabBarProps) => (
-  !options ? null : <View style={styles.container}>
+const BottomMenu = ({ menu, onPress }: BottomMenuProps) => (
+  !menu ? null : <View style={styles.container}>
     {
-      options.map(({ active, title, icon, url }, index) => (
+      menu.map(({ active, title, icon, url }, index) => (
         <View key={[title, url, index].join(',')} style={styles.option}>
           <TouchableOpacity onPress={() => onPress(url)} style={styles.touchable}>
             <Icon name={icon} size={30} style={active && styles.activeIcon} />
@@ -46,4 +46,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default BottomTabBar
+export default BottomMenu

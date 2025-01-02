@@ -3,12 +3,12 @@ import { SafeAreaView, StyleSheet } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect, useReducer, useRef } from 'react';
-import menuReducer from '@/utils/menuReducer';
+import { bottomMenuReducer } from '@/utils/menuReducer';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 import WebScreen from './WebScreen';
-import TabNavigation from './TabNavigation';
+import BottomMenu from '@/components/BottomMenu';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -19,7 +19,7 @@ export default function RootLayout() {
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
 
-  const [menu, menuDispatch] = useReducer(menuReducer, null)
+  const [menu, menuDispatch] = useReducer(bottomMenuReducer, null)
   const webScreenRef = useRef()
 
   const onPress = (url: string) => {
@@ -43,7 +43,7 @@ export default function RootLayout() {
           innerRef={webScreenRef}
           menuDispatch={menuDispatch}
         />
-        <TabNavigation
+        <BottomMenu
           menu={menu}
           onPress={onPress}
         />

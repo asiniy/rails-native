@@ -5,14 +5,13 @@
 1. Pushes
     1. Look at the docs for pushes in this article - especially, for a custom rails server
     1. TODO add steps
-1. Usual menu rename into bottom bar menu - and reducer and other react-native file names
 1. Bottom bar menu - add colors, themes et.c.
 1. Add top native menu
 1. Offline mode
 1. `asiniy` -> `mad.online` as a GitHub username
 1. User agent - include all the details from the expo device + helpers
-1. Custom icon
-1. After install - do everything on `npm install` et.c.
+1. Custom app icon
+1. After install - do everything on `bundle install` et.c.
 1. [TODO] Search for all `TODO`, `mad` & `crocodile`, `webview-app` in the code, and handle these
 
 Painless ✅, Ultrafast ⚡ & Free-minded 💡 way to build Native Mobile Apps using Ruby on Rails
@@ -76,7 +75,7 @@ Available in both controller & helper.
 is_rails_native_request? # => true
 ```
 
-### Build native menu with `rails_native_menu`/`rails_native_menu_item`
+### Build native menu with `rails_native_bottom_menu`/`rails_native_bottom_menu_item`
 
 [TODO] It's a bottom bar menu actually, not just a menu. Rename everything, including TypeScript & JSON files
 
@@ -84,9 +83,9 @@ Take icons from the [FontAwesome V6](https://fontawesome.com/v6/search?o=r&m=fre
 
 ```
 <% if is_rails_native_request? %>
-  <%= rails_native_menu do %>
-    <%= rails_native_menu_item "Home", root_path, active: current_page?(root_path), icon: "house" %>
-    <%= rails_native_menu_item "Adminpanel", admin_path, active: current_page?(admin_path), icon: "user" %>
+  <%= rails_native_bottom_menu do %>
+    <%= rails_native_bottom_menu_item "Home", root_path, active: current_page?(root_path), icon: "house" %>
+    <%= rails_native_bottom_menu_item "Adminpanel", admin_path, active: current_page?(admin_path), icon: "user" %>
     ...
   <% end %>
 <% else %>
