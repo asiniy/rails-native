@@ -8,11 +8,11 @@
 1. Usual menu rename into bottom bar menu - and reducer and other react-native file names
 1. Bottom bar menu - add colors, themes et.c.
 1. Add top native menu
-1. Handle the url in WebScreen.tsx - using the `.yml` file
 1. App name - using the `.yml` file
 1. Offline mode
 1. `asiniy` -> `mad.online` as a GitHub username
-1. User agent - include all the details from the expo device
+1. User agent - include all the details from the expo device + helpers
+1. Custom icon
 1. [TODO] Search for all `TODO`, `mad` & `crocodile`, `webview-app` in the code, and handle these
 
 Painless ✅, Ultrafast ⚡ & Free-minded 💡 way to build Native Mobile Apps using Ruby on Rails
@@ -59,10 +59,9 @@ module ApplicationHelper
 
 [TODO]
 
-## Develop on mobile
+## Develop on Expo
 
-[TODO]
-[TODO] Also, don't forget to write an instruction on how to find out the localhost!
+### How to obtain my IP on local network?
 
 ## Developer API
 

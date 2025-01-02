@@ -6,6 +6,8 @@ class RailsNative
 
     source_root File.expand_path("templates", __dir__)
 
-    # do nothing right now
+    def copy_config
+      copy_file "config/rails-native.yml"
+    end
   end
 end

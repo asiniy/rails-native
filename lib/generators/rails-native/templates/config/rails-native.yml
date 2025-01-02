@@ -1,0 +1,3 @@
+webview_url:
+  development: http://192.168.0.1:3000/mobile # Obtain your wi-fi network IP: https://github.com/mad.online/rails-native?tab=readme-ov-file#how-to-obtain-my-ip-on-local-network
+  production: https://your-awesome-app.com/mobile

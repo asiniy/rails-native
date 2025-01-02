@@ -1,4 +1,5 @@
 require "controller"
+require "generators/rails-native/install_generator"
 require "helpers"
 
 class RailsNative
