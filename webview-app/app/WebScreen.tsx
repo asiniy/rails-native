@@ -1,7 +1,6 @@
 import { WebView } from 'react-native-webview'
 import DOMParser from 'react-native-dom-parser'
-import * as config from '@/config.json'
-import Message from '@/utils/message'
+import * as globals from '@/globals.json'
 import handleMenu from '@/utils/handleMenu'
 
 type NativeEvent = {
@@ -17,26 +16,22 @@ const SEND_HTML = 'window.sendHTML = () => { window.ReactNativeWebView.postMessa
 const OPEN_URL = 'window.openURL = (url) => { window.location.replace(url) }'
 
 const injectedJavaScript = [SEND_HTML, OPEN_URL].join(';')
-const handleMessage = ({ menuDispatch }) => ({ nativeEvent }: { nativeEvent: NativeEvent }) => {
-  console.log('nativeEvent Data', nativeEvent.data)
+const handleHTML = ({ menuDispatch }) => ({ nativeEvent }: { nativeEvent: NativeEvent }) => {
   const { event, payload }: { event: string, payload: object } = JSON.parse(nativeEvent.data)
-  const message = new Message({ direction: 'in', event, payload })
-  console.log('received a message', message.serialize)
 
-  switch (message.event) {
+  switch (event) {
     case 'rails-native.html.change':
-      const html = new DOMParser(message.payload.html as string)
+      const html = new DOMParser(payload.html as string)
       handleMenu({ menuDispatch, html })
       return
     default:
-      handleMessage(message)
-      return
+      throw new Error()
   }
 }
 
-const source = { uri: 'http://192.168.1.142:3000' } // TODO fix it
+const source = { uri: process.env.EXPO_PUBLIC_WEBVIEW_URL }
 
-const USER_AGENT = `${config.USER_AGENT}/${config.VERSION}`
+const USER_AGENT = `${globals.USER_AGENT}/${globals.VERSION}`
 
 const WebScreen = ({ menuDispatch, innerRef }) => {
   return (
@@ -48,7 +43,7 @@ const WebScreen = ({ menuDispatch, innerRef }) => {
       allowsProtectedMedia
       injectedJavaScript={injectedJavaScript}
       mediaPlaybackRequiresUserAction={false}
-      onMessage={handleMessage({ menuDispatch })}
+      onMessage={handleHTML({ menuDispatch })}
       onNavigationStateChange={() => { innerRef.current.injectJavaScript('window.sendHTML()') }}
       source={source}
       userAgent={USER_AGENT}

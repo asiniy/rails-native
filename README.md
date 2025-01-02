@@ -8,11 +8,11 @@
 1. Usual menu rename into bottom bar menu - and reducer and other react-native file names
 1. Bottom bar menu - add colors, themes et.c.
 1. Add top native menu
-1. App name - using the `.yml` file
 1. Offline mode
 1. `asiniy` -> `mad.online` as a GitHub username
 1. User agent - include all the details from the expo device + helpers
 1. Custom icon
+1. After install - do everything on `npm install` et.c.
 1. [TODO] Search for all `TODO`, `mad` & `crocodile`, `webview-app` in the code, and handle these
 
 Painless ✅, Ultrafast ⚡ & Free-minded 💡 way to build Native Mobile Apps using Ruby on Rails
